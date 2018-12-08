@@ -1,19 +1,94 @@
 <!--项目二——需求管理详情-->
 <template>
     <div class="home_page">
-        nihao
+                
+        <!--radio单选-->
+        <filter-radio v-model="radioModel"
+            :selectitemlist="radioOptions">
+        </filter-radio>
+
+        <!--checkbox多选-->
+        <filter-checkbox v-model="checkboxModel" 
+            :selectitemlist="checkboxOptions" :indeterminate="false"
+            :checkAll="false">
+        </filter-checkbox>
+
+                <!--4、select单选-->
+                <!-- <filter-selecter v-model="modelList[index].model[0]" v-if="item.inputtype==4"
+                    :selectitemlist="item.selectitemlist"
+                    @change="linkSelect(item.id, item.inputname, index)"
+                    :ref="item.inputname+item.id">
+                </filter-selecter> -->
+
+                <!--5、select多选-->
+                <!-- <filter-selecter v-model="modelList[index].model" v-if="item.inputtype==5"
+                    :selectitemlist="item.selectitemlist" multiple data-actions-box
+                    @change="linkSelect(item.id, item.inputname, index)"
+                    :ref="item.inputname+item.id">
+                </filter-selecter> -->
+
+                <!--6、自动补全单选(本地)-->
+                <!-- <filter-remote v-model="modelList[index].model[0]" 
+                    :selectitemlist="modelList[index].options" 
+                    v-if="item.inputtype==6 && (item.loadtype==1 || item.loadtype==2)" 
+                    :ref="item.inputname+item.id"
+                    @change="linkSelect(item.id, item.inputname, index)">
+                </filter-remote> -->
+
+                <!--6、自动补全单选(网络)-->
+                <!-- <filter-remote v-model="modelList[index].model[0]" async
+                    :selectitemlist="modelList[index].options" :apiName="apiName" :selectionId="item.id"
+                    :ownName="item.inputname" :parentName="item.parentname"
+                    v-if="item.inputtype==6 && item.loadtype==3" 
+                    :ref="item.inputname+item.id"
+                    @change="linkSelect(item.id, item.inputname, index)">
+                </filter-remote> -->
+
+                <!--7、自动补全多选(本地)-->
+                <!-- <filter-remote v-model="modelList[index].model" multiple data-actions-box
+                    :selectitemlist="modelList[index].options"
+                    v-if="item.inputtype==7 && (item.loadtype==1 || item.loadtype==2)" 
+                    :ref="item.inputname+item.id"
+                    @change="linkSelect(item.id, item.inputname, index)">
+                </filter-remote> -->
+
+                <!--7、自动补全多选(网络)-->
+                <!-- <filter-remote v-model="modelList[index].model" multiple async data-actions-box
+                    :selectitemlist="modelList[index].options" 
+                    :apiName="apiName" :selectionId="item.id"
+                    :ownName="item.inputname" :parentName="item.parentname"
+                    v-if="item.inputtype==7 && item.loadtype==3" 
+                    :ref="item.inputname+item.id"
+                    @change="linkSelect(item.id, item.inputname, index)">
+                </filter-remote> -->
+
+                <!--9、select分组多选(本地)-->
+                <!-- <filter-selecter-group v-model="modelList[index].model" multiple
+                    :selectitemlist="modelList[index].options" 
+                    v-if="item.inputtype==9" :ref="item.inputname+item.id">
+                </filter-selecter-group> -->
         
     </div>
 </template>
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    import {completeOptions} from '@/assets/scripts/file.js'
+    import {options01, options02} from '@/assets/scripts/file.js'
+    import filterRadio from '@/components/filterItems/radio'
+    import filterCheckbox from '@/components/filterItems/checkbox'
+    import filterSelect from '@/components/filterItems/selecter'
+    import filterRemote from '@/components/filterItems/remote'
+    import filterSelectGroup from '@/components/filterItems/selecterGroup'
 	
 	export default {
         name: "homeIndex",
         data (){
             return{
+                radioModel: "",
+                radioOptions: [],
+                checkboxModel: [],
+                checkboxOptions: [],
+
                 dialogVisible: true,
                 //项目二
                 tableData: [],
@@ -125,26 +200,11 @@
 
         },
         mounted(){
-            //console.log("进入project");
-            this.completeOptions = completeOptions;
-            this.init();
-            this.makeFilterList1(); //初始化项目类型过滤列表
-        },
-        watch:{
-            "proejct2TaskOptions":{ //重新拼接项目类型过滤列表
-                handler(newVal, oldVal){
-                    this.makeFilterList1();
-                }
-            },
-            "isSubmited":{
-                handler(newVal, oldVal){
-                    if(true==newVal)
-                        this.init();
-                }
-            }
+            this.radioOptions = options01;
+            this.checkboxOptions = options02;
         },
 		components:{
-			
+			filterRadio, filterCheckbox, filterSelect, filterRemote, filterSelectGroup
         }
 	}
 	

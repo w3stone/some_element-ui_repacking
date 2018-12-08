@@ -1,8 +1,17 @@
 
-var mainOptions = [
-    {"label": "医院沟通详情", "value":0, "path":"/hospital"},
-    {"label": "需求管理详情", "value":1, "path":"/project"},
-    {"label": "任务记录详情", "value":2, "path":"/task"}
+var options01 = [
+    {"name": "单选01", "value":0},
+    {"name": "单选02", "value":1},
+    {"name": "单选03", "value":2}
+]
+
+
+var options02 = [
+    {"name": "多选01", "value":0},
+    {"name": "多选02", "value":1},
+    {"name": "多选03", "value":2},
+    {"name": "多选04", "value":3},
+    {"name": "多选05", "value":4},
 ]
 
 //完成情况
@@ -50,5 +59,5 @@ var dqDeatialForm = {
 };
 
 export{
-    dqForm, dqDeatialForm, mainOptions, completeOptions
+    options01, options02, mainOptions, completeOptions
 }
