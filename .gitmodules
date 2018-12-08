@@ -1,0 +1,3 @@
+[submodule "src/assets/scripts/filterItems"]
+	path = src/assets/scripts/filterItems
+	url = https://github.com/w3stone/filterItems.git
