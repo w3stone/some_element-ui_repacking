@@ -1,99 +1,7 @@
 <!--项目二——需求管理详情-->
 <template>
-    <div class="project_page main_page">
-        <div class="search_bar clearfix">
-            <div class="search_filter">
-                <el-input placeholder="可以搜索项目名、需求来源、任务类型" v-model="searchInput" 
-                    @keyup.native="search()" @change="search()" clearable></el-input>
-            </div>
-
-            <el-button type="primary" class="search_detail_btn" @click="handle(0)">+</el-button>
-            <el-button type="primary" class="search_detail_btn" @click="init()"><i class="el-icon-refresh"></i></el-button>
-            <el-button type="primary" class="search_detail_btn" @click="changeExcelDgVisible(true)">导出excel</el-button>
-
-            <h3 class="page_title">需求管理详情</h3>
-        </div>
-
-        <!--表格1-->
-        <div class="table_box">
-            <el-table :data="tableData" height="100%" style="width: 100%">
-
-                <el-table-column prop="id" label="序号" width="60">
-                    <template slot-scope="scope">
-                        <span>{{ scope.$index+1 }}</span>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="projectType" label="项目类型" 
-                    :filters="filterList1" :filter-method="filterHandler1">
-                    <template slot-scope="scope">
-                        <span>{{ $transValue(scope.row.projectType, proejct2TaskOptions) }}</span>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="projectName" label="项目名" min-width="200"></el-table-column>
-
-                <el-table-column prop="achievePerson" label="负责人">
-                    <template slot-scope="scope">
-                        <span>{{ $transValue(scope.row.achievePerson, commPersonOptions) }}</span>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="projectPerson" label="客户名称">
-                    <template slot-scope="scope">
-                        <span>{{ $transValue(scope.row.projectPerson, projectPersonOptions) }}</span>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="completeSituation" label="完成情况"
-                    :filters="filterList2" :filter-method="filterHandler2">
-                    <template slot-scope="scope">
-                        <span :class="$completeStyle(scope.row.completeSituation)">
-                            {{ $transValue(scope.row.completeSituation, completeOptions, 1) }}</span>
-                    </template>
-                </el-table-column>
-                
-                <el-table-column prop="projectFee" label="项目金额">
-                    <template slot-scope="scope">
-                        <span>{{ scope.row.projectFee }}</span>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="receipt" label="已开票金额">
-                    <template slot-scope="scope">
-                        <span>{{ scope.row.receipt }}</span>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="actualFee" label="实收金额">
-                    <template slot-scope="scope">
-                        <span>{{ scope.row.actualFee }}</span>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="startTime" label="开始时间" width="164">
-                    <template slot-scope="scope">
-                        <!-- <span>{{ $transDate(scope.row.startTime) }}</span> -->
-                        <time-widget :time="$transDate(scope.row.startTime)" :showMinute="true"></time-widget>
-                    </template>
-                </el-table-column>
-                
-                <el-table-column prop="endTime" label="结束时间" width="164">
-                    <template slot-scope="scope">
-                        <!-- <span>{{ $transDate(scope.row.endTime) }}</span> -->
-                        <time-widget :time="$transDate(scope.row.endTime)" :showMinute="true"></time-widget>
-                    </template>
-                </el-table-column>
-
-                <el-table-column label="操作" width="220">
-                    <template slot-scope="scope">
-                        <el-button size="mini" type="primary" @click="seeDetail(scope.row.id, scope.row.projectName)">详情</el-button>
-                        <el-button size="mini" @click="handle(scope.row.id)">编辑</el-button>
-                        <el-button size="mini" type="danger" @click="del(scope.row.id)">删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-        </div>
+    <div class="home_page">
+        nihao
         
     </div>
 </template>
@@ -101,7 +9,6 @@
 <script>
     import {mapState, mapMutations} from 'vuex'
     import {completeOptions} from '@/assets/scripts/file.js'
-    import timeWidget from '@/components/timeWidget'
 	
 	export default {
         name: "homeIndex",

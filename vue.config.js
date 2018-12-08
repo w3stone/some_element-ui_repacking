@@ -12,15 +12,6 @@ module.exports = {
             }
         }
     },
-    devServer: { //测试环境代理
-        proxy:{
-            '/DemandManagePlatform/api': {
-                //target: 'http://192.168.18.159:8080',
-                target: 'http://192.168.0.123:8080',
-                changeOrigin: true
-            }
-        }
-    }, 
     configureWebpack: {
         plugins:[
             new webpack.ProvidePlugin({

@@ -4,34 +4,8 @@ import router from "./router";
 import store from "./store";
 import "./plugins/element.js";
 
-import {dataGet, dataGetXD, dataPost, dataPostXD} from './assets/scripts/ajaxFn.js'
-import{
-    setCookie, getCookie, clearCookie,
-    setSession, getSession, clearSession,
-    setCache, getCache, checkCache, ifCacheFn
-} from './assets/scripts/storageFn.js'
 
 Vue.config.productionTip = false;
-
-//全局
-Vue.prototype.$dataGet = dataGet;
-Vue.prototype.$dataGetXD = dataGetXD;
-Vue.prototype.$dataPost = dataPost;
-Vue.prototype.$dataPostXD = dataPostXD;
-
-Vue.prototype.$setSession = setSession;
-Vue.prototype.$getSession = getSession;
-Vue.prototype.$clearSession = clearSession;
-
-Vue.prototype.$setCookie = setCookie;
-Vue.prototype.$getCookie = getCookie;
-Vue.prototype.$clearCookie = clearCookie;
-
-Vue.prototype.$setCache = setCache;
-Vue.prototype.$getCache = getCache;
-Vue.prototype.$checkCache = checkCache;
-Vue.prototype.$ifCacheFn = ifCacheFn;
-
 
 //保留x位小数
 Vue.prototype.$reserveDecimal = function(num, dig){ 
