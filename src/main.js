@@ -2,10 +2,20 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import hljs  from 'highlight.js'
+import 'highlight.js/styles/atom-one-dark.css'
 import "./plugins/element.js";
 
 
 Vue.config.productionTip = false;
+
+Vue.directive('highlight',function (el) {
+    let blocks = el.querySelectorAll('pre code');
+    blocks.forEach((block)=>{
+        hljs.highlightBlock(block)
+    })
+});
+
 
 //保留x位小数
 Vue.prototype.$reserveDecimal = function(num, dig){ 

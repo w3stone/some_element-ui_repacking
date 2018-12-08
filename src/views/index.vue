@@ -1,6 +1,16 @@
 <!--项目二——需求管理详情-->
 <template>
     <div class="home_page">
+        
+        <pre v-highlight>
+            <code class="css">
+                {
+                border: 1px solid #fff;
+                }
+            </code>
+        </pre>
+            
+        
                 
         <!--radio单选-->
         <filter-radio v-model="radioModel"
