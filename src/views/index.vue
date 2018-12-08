@@ -144,7 +144,7 @@
             }
         },
 		components:{
-			timeWidget
+			
         }
 	}
 	
