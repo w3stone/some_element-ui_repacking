@@ -1,3 +1,6 @@
 [submodule "src/assets/scripts/filterItems"]
 	path = src/assets/scripts/filterItems
 	url = https://github.com/w3stone/filterItems.git
+[submodule "src/components/filterItems"]
+	path = src/components/filterItems
+	url = https://github.com/w3stone/filterItems.git
