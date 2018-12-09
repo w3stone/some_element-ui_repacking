@@ -28,51 +28,13 @@
                             }
                         }
                     &lt;/script&gt;
-
                 </code>
             </pre>
         </div>
 
+        <radio-view></radio-view>
 
-        <!--radio单选-->
-        <div class="item_group">
-            <h3 class="group_title">radio单选</h3>
-
-            <filter-radio v-model="radioModel"
-                :options="radioOptions">
-            </filter-radio>
-
-            <div class="values_content">
-                <b>返回结果：</b>{{ JSON.stringify(radioModel) }}
-            </div>
-
-            <pre v-highlight>
-                <code class="html">
-                    &lt;template&gt;
-                        &lt;filter-radio v-model="radioModel" :options="radioOptions"&gt;&lt;/filter-radio&gt;
-                    &lt;/template&gt;
-                </code>
-            </pre>
-        </div>
-
-        <!--checkbox多选-->
-        <div class="item_group">
-            <h3 class="group_title">checkbox多选</h3>
-
-            <filter-checkbox v-model="checkboxModel" :options="checkboxOptions" isCheckAll></filter-checkbox>
-
-            <div class="values_content">
-                <b>返回结果：</b>{{ JSON.stringify(checkboxModel) }}
-            </div>
-
-            <pre v-highlight>
-                <code class="html">
-                    &lt;template&gt;
-                        &lt;filter-radio v-model="radioModel" :options="radioOptions"&gt;&lt;/filter-radio&gt;
-                    &lt;/template&gt;
-                </code>
-            </pre>
-        </div>
+        <checkbox-view></checkbox-view>
         
 
                 <!--4、select单选-->
@@ -137,8 +99,9 @@
     import {mapState, mapMutations} from 'vuex'
     import {options01, options02} from '@/assets/scripts/file.js'
     import {defaultProps} from '@/components/filterItems/config.js'
-    import filterRadio from '@/components/filterItems/radio'
-    import filterCheckbox from '@/components/filterItems/checkbox'
+    import radioView from '@/views/eachViews/radioView'
+    import checkboxView from '@/views/eachViews/checkboxView'
+    
     import filterSelect from '@/components/filterItems/selecter'
     import filterRemote from '@/components/filterItems/remote'
     import filterSelectGroup from '@/components/filterItems/selecterGroup'
@@ -147,119 +110,11 @@
         name: "homeIndex",
         data (){
             return{
-                radioModel: "",
-                radioOptions: [],
-                checkboxModel: [],
-                checkboxOptions: [],
 
-                dialogVisible: true,
-                //项目二
-                tableData: [],
-                completeOptions: [],
-                filterList1: [{"text": "数据查询", "value":1}],
-                searchInput: "", //搜索内容
-            }
-        },
-        computed:{
-            //接收vuex的传值
-            ...mapState({
-                "isSubmited": state => state.isSubmited,
-                "tableDialogVisible": state => state.tableDialogVisible,
-                "tableDataCopy": state => state.tableDataCopy,
-                "editDialogVisible": state => state.editDialogVisible,
-                "commPersonOptions": state => state.commPersonOptions, //项目负责人
-                "projectPersonOptions": state => state.projectPersonOptions, //需求人
-                "proejct2TaskOptions": state => state.proejct2TaskOptions, //
-            }),
-            filterList2(){ //完成情况过滤列表
-                return this.completeOptions.map((item)=>{
-                    return {"text": item.label, "value":item.value}
-                });
             }
         },
         methods:{
-            ...mapMutations({
-                changeEditDgVisible: "changeEditDgVisible",
-                changeTableDgVisible: "changeTableDgVisible",
-                changeExcelDgVisible: "changeExcelDgVisible",
-                changeTableData: "changeTableData",
-                changeTableDetailData: "changeTableDetailData",
-                changeCurrentOuterId: "changeCurrentOuterId",
-                changeProjectName: "changeProjectName",
-                changeSubmit: "changeSubmit" //改变提交状态
-            }),
-            //初始化方法
-            init(){
-                this.getDemandQuery();
-                this.getDemandQueryDetails();
-                this.$alert("刷新成功！", 1);
-                this.changeSubmit(false);
-            },
-            //获取项目2表格1数据
-            getDemandQuery(){
-                this.$dataGet("/getDemandQuery", (data)=>{
-                    //console.log(data);
-                    this.tableData = data;
-                    this.changeTableData(data);
-                    //清空
-                    //this.changeCurrentOuterId(0);
-                    //this.changeProjectName("");
-                });
-            },
-            //获取项目2表格2数据
-            getDemandQueryDetails(){
-                this.$dataGet("/getDemandQueryDetails", (data)=>{
-                    this.changeTableDetailData(data);
-                });
-            },
-            //条件筛选
-            search(){ 
-                let inputSearchData = this.searchInput? this.tableDataCopy.filter((o)=>{
-                    var personName = this.$transValue(o.projectPerson, this.projectPersonOptions);
-                    var projectType = this.$transValue(o.projectType, this.proejct2TaskOptions);
-
-                    return o.projectName.indexOf(this.searchInput)!=-1 
-                    || personName.indexOf(this.searchInput)!=-1
-                    || projectType.indexOf(this.searchInput)!=-1
-                }): this.tableDataCopy;
-
-                this.tableData = inputSearchData;
-            },
-            //查看详情(表二)
-            seeDetail(id, name){
-                this.changeTableDgVisible(true); //打开弹框
-                this.changeCurrentOuterId(id);
-                this.changeProjectName(name);                
-            },
-            //添加or编辑
-            handle(hosId){
-                this.changeEditDgVisible(true);
-                this.changeCurrentOuterId(hosId);
-            },
-            //删除
-            del(id){
-                let params = { id: id };
-
-                this.$btnConfirm(()=>{ //点击确定事件
-                    this.$dataGetXD("/deleteDemandQuery", params, ()=>{
-                        this.changeSubmit(true);
-                    });
-                });
-            },
-            //拼接项目类型列表
-            makeFilterList1(){
-                this.filterList1 = this.proejct2TaskOptions.map((item)=>{
-                    return {"text": item.label, "value":item.value}
-                });
-            },
-            //项目类型筛选
-            filterHandler1(value, row){
-                return row.projectType == value;
-            },
-            //状态筛选
-            filterHandler2(value, row){
-                return row.completeSituation == value;
-            }
+            
 
         },
         mounted(){
@@ -267,7 +122,7 @@
             this.checkboxOptions = options02;
         },
 		components:{
-			filterRadio, filterCheckbox, filterSelect, filterRemote, filterSelectGroup
+			radioView, checkboxView, filterSelect, filterRemote, filterSelectGroup
         }
 	}
 	
@@ -278,11 +133,20 @@
         padding: 0 50px;
 
         .item_group{
+            border-bottom: 1px solid #ededed;
+            padding-top: 20px;
+
             .group_title{
                 font-weight: 400;
                 color: #1f2f3d;
                 font-size: 28px;
                 margin: 14px 0;
+            }
+            .sub_title{
+                font-weight: 400;
+                color: #1f2f3d;
+                font-size: 22px; 
+                margin: 30px 0 20px;
             }
             //使用介绍
             .introduction{
