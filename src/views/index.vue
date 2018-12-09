@@ -37,6 +37,8 @@
         <checkbox-view></checkbox-view>
 
         <select-view></select-view>
+
+        <remote-view></remote-view>
         
 
                 <!--4、select单选-->
@@ -104,6 +106,7 @@
     import radioView from '@/views/eachViews/radioView'
     import checkboxView from '@/views/eachViews/checkboxView'
     import selectView from '@/views/eachViews/selectView'
+    import remoteView from '@/views/eachViews/remoteView'
     
     import filterSelect from '@/components/filterItems/select'
     import filterRemote from '@/components/filterItems/remote'
@@ -125,7 +128,7 @@
             this.checkboxOptions = options02;
         },
 		components:{
-			radioView, checkboxView, selectView, filterRemote, filterSelectGroup
+			radioView, checkboxView, selectView, remoteView, filterSelectGroup
         }
 	}
 	
