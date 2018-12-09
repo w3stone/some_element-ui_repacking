@@ -1,27 +1,79 @@
 <!--项目二——需求管理详情-->
 <template>
     <div class="home_page">
-        
-        <pre v-highlight>
-            <code class="css">
-                {
-                border: 1px solid #fff;
-                }
-            </code>
-        </pre>
-            
-        
-                
+        <div class="item_group">
+            <h3 class="group_title">基础用法</h3>
+            <p class="introduction">给每一组件绑定<span>v-model</span>, 传入<span>options</span>。
+                可通过传入<span>props</span>来设置配置项(可选，默认配置项见下)，
+                如果添加<span>special</span>属性，返回JSON.stringify()/集合
+            </p>
+
+            <pre v-highlight>
+                <code class="html">
+                    &lt;script&gt;
+                        export default {
+                            data () {
+                                return {
+                                    model: [],
+                                    options_example: [
+                                        {"name": "item01", "value":0},
+                                        {"name": "item02", "value":1},
+                                        {"name": "item03", "value":2}
+                                    ],
+                                    defaultProps = {
+                                        label: 'name',
+                                        value: 'value'
+                                    }
+                                };
+                            }
+                        }
+                    &lt;/script&gt;
+
+                </code>
+            </pre>
+        </div>
+
+
         <!--radio单选-->
-        <filter-radio v-model="radioModel"
-            :selectitemlist="radioOptions">
-        </filter-radio>
+        <div class="item_group">
+            <h3 class="group_title">radio单选</h3>
+
+            <filter-radio v-model="radioModel"
+                :options="radioOptions">
+            </filter-radio>
+
+            <div class="values_content">
+                <b>返回结果：</b>{{ JSON.stringify(radioModel) }}
+            </div>
+
+            <pre v-highlight>
+                <code class="html">
+                    &lt;template&gt;
+                        &lt;filter-radio v-model="radioModel" :options="radioOptions"&gt;&lt;/filter-radio&gt;
+                    &lt;/template&gt;
+                </code>
+            </pre>
+        </div>
 
         <!--checkbox多选-->
-        <filter-checkbox v-model="checkboxModel" 
-            :selectitemlist="checkboxOptions" :indeterminate="false"
-            :checkAll="false">
-        </filter-checkbox>
+        <div class="item_group">
+            <h3 class="group_title">checkbox多选</h3>
+
+            <filter-checkbox v-model="checkboxModel" :options="checkboxOptions" isCheckAll></filter-checkbox>
+
+            <div class="values_content">
+                <b>返回结果：</b>{{ JSON.stringify(checkboxModel) }}
+            </div>
+
+            <pre v-highlight>
+                <code class="html">
+                    &lt;template&gt;
+                        &lt;filter-radio v-model="radioModel" :options="radioOptions"&gt;&lt;/filter-radio&gt;
+                    &lt;/template&gt;
+                </code>
+            </pre>
+        </div>
+        
 
                 <!--4、select单选-->
                 <!-- <filter-selecter v-model="modelList[index].model[0]" v-if="item.inputtype==4"
@@ -84,6 +136,7 @@
 <script>
     import {mapState, mapMutations} from 'vuex'
     import {options01, options02} from '@/assets/scripts/file.js'
+    import {defaultProps} from '@/components/filterItems/config.js'
     import filterRadio from '@/components/filterItems/radio'
     import filterCheckbox from '@/components/filterItems/checkbox'
     import filterSelect from '@/components/filterItems/selecter'
@@ -221,5 +274,41 @@
 </script>
 
 <style lang="scss" type="test/css">
-    
+    .home_page{
+        padding: 0 50px;
+
+        .item_group{
+            .group_title{
+                font-weight: 400;
+                color: #1f2f3d;
+                font-size: 28px;
+                margin: 14px 0;
+            }
+            //使用介绍
+            .introduction{
+                font-size: 16px;
+                span{
+                    color: #5e6d82;
+                    background-color: #e6effb;
+                    margin: 0 4px;
+                    display: inline-block;
+                    padding: 1px 5px;
+                    font-size: 12px;
+                    border-radius: 3px;
+                    height: 18px;
+                    line-height: 18px;
+                }
+            }
+            //返回结果
+            .values_content{
+                height: 28px;
+                line-height: 28px;
+                padding-left: 5px;
+                margin-top: 5px;
+            }
+            pre{
+                margin-top: 0;
+            }
+        }
+    }
 </style>
