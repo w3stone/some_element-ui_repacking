@@ -35,6 +35,8 @@
         <radio-view></radio-view>
 
         <checkbox-view></checkbox-view>
+
+        <select-view></select-view>
         
 
                 <!--4、select单选-->
@@ -101,8 +103,9 @@
     import {defaultProps} from '@/components/filterItems/config.js'
     import radioView from '@/views/eachViews/radioView'
     import checkboxView from '@/views/eachViews/checkboxView'
+    import selectView from '@/views/eachViews/selectView'
     
-    import filterSelect from '@/components/filterItems/selecter'
+    import filterSelect from '@/components/filterItems/select'
     import filterRemote from '@/components/filterItems/remote'
     import filterSelectGroup from '@/components/filterItems/selecterGroup'
 	
@@ -122,7 +125,7 @@
             this.checkboxOptions = options02;
         },
 		components:{
-			radioView, checkboxView, filterSelect, filterRemote, filterSelectGroup
+			radioView, checkboxView, selectView, filterRemote, filterSelectGroup
         }
 	}
 	
@@ -165,7 +168,6 @@
             }
             //返回结果
             .values_content{
-                height: 28px;
                 line-height: 28px;
                 padding-left: 5px;
                 margin-top: 5px;
